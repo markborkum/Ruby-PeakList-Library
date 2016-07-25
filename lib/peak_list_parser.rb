@@ -1,11 +1,10 @@
-require 'rubygems'
 require 'nokogiri'
 require 'date'
 
 module Bruker
   module XML
     # Contains functions for parsing and wrapping up groups pf peak lists
-    class PLParser 
+    class PLParser
       # Parses and wraps the details of a peak list header
       # ARGS
       #    ds : The raw contents of the "PeakList1DHeader" tag
@@ -55,7 +54,7 @@ module Bruker
       end
     end
   end
-  
+
   # Wrapper around a list of peaks and their accompanying header
   class PeakList
      def initialize(header, peaks)

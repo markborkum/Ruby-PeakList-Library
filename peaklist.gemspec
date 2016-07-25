@@ -9,4 +9,6 @@ Gem::Specification.new do |s|
   s.files       = ['lib/peakListParser.rb']
   s.homepage    = 'https://github.com/megultron/Ruby-PeakList-Library'
   s.license     = 'ECL-2.0'
+  s.add_runtime_dependency "nokogiri",
+    [">= 1.6"]
 end
