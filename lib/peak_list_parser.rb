@@ -17,7 +17,6 @@ module Bruker
         mi = /MI=(.*)cm, MAXI/.match(c)[1]
         mx = /MAXI=(.*)cm, PC/.match(c)[1]
         pc = /PC=(.*)/.match(c)[1]
-        PeakPickDetails.new(f1, f2, mi, mx, pc)
         return PeakPickDetails.new(f1, f2, mi, mx, pc)
       end
 
