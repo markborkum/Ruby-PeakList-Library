@@ -31,17 +31,16 @@ module Bruker
 
         ls = []
         hs = []
-        @doc.css("PeakList1D1D").each do |l_node|
-          h = l_node.at_css("PeakList1D1DHeader")
-          pd = h.at_css("PeakPeakPickDetails")
-          c = h.at_css("@creator").value.to_s
+        @doc.css("PeakList1D").each do |l_node|
+          h = l_node.at_css("PeakList1DHeader")
+          c = h.at_css("@creator")
           d = h.at_css("@date")
-          x = h.at_css("@expNo").value.to_i
-          n = h.at_css("@name").value.to_s
-          o = h.at_css("@owner").value.to_s
-          p = h.at_css("@procNo").value.to_i
-          s = h.at_css("@source").value.to_s
-          dets = h.at_css("PeakPeakPickDetails")
+          x = h.at_css("@expNo")
+          n = h.at_css("@name")
+          o = h.at_css("@owner")
+          p = h.at_css("@procNo")
+          s = h.at_css("@source")
+          dets = h.at_css("PeakPickDetails")
           dets = parseDetails(dets)
           h = PeakList1DHeader.new(c, d, x, n, o, p, s, dets)
 
@@ -57,7 +56,7 @@ module Bruker
 
   # Wrapper around a list of peaks and their accompanying header
   class PeakList1D
-    attr_accessor (:header, :peaks)
+    attr_accessor :header, :peaks
      def initialize(header, peaks)
        @header = header
        @peaks = peaks
@@ -65,42 +64,45 @@ module Bruker
   end
 
   # Wrapper around a peak list's header
-  class PeakList1D1DHeader
-    attr_accessor (:creator, :date, :expNo, :name, :owner, :procNo, :source, :details)
+  class PeakList1DHeader
+    attr_accessor :creator, :date, :expNo, :name, :owner, :procNo, :source, :details
 
     def initialize(creator, date, expNo, name, owner, procNo, source, details)
-      @creator = creator
+      @creator = creator.value.to_s
       @date = DateTime.strptime(date, "%Y-%m-%dT%H:%M:%S")
-      @expNo = expNo
-      @name = name
-      @owner = owner
-      @procNo = procNo
-      @source = source
+      @expNo = expNo.value.to_i
+      @name = name.value.to_s
+      @owner = owner.value.to_s
+      @procNo = procNo.value.to_i
+      @source = source.value.to_s
       @details = details
     end
   end
 
   # Wrapper around the parameters for peak selection
   class PeakPickDetails
-    attr_accessor(:f1, :f2, :MI, :MAXI, :PC)
+    attr_accessor :f1, :f2, :MI, :MAXI, :PC
 
     def initialize(f1, f2, mi, maxi, pc)
-      @F1 = f1
-      @F2 = f2
-      @MI = mi
-      @MAXI = maxi
-      @PC = pc
+      @F1 = f1.to_f
+      @F2 = f2.to_f
+      @MI = mi.to_f
+      @MAXI = maxi.to_f
+      @PC = pc.to_f
     end
   end
 
   # Wrapper around individual peak data
   class Peak1D
-    attr_accessor (:f1, :intensity, :type)
+    attr_accessor :f1, :intensity, :type
 
     def initialize(f1, intensity, type)
-      @f1 = f1
-      @intensity = intensity
-      @type = type
+      @f1 = f1.value.to_f
+      @intensity = intensity.value.to_f
+      @type = type.value.to_i
     end
   end
 end
+
+ls = Bruker::XML::PLParser.new.parsePL(ARGV[0])
+puts ls
