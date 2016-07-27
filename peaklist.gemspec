@@ -1,14 +1,13 @@
 Gem::Specification.new do |s|
   s.name        = 'peaklist'
-  s.version     = '0.0.1'
-  s.date        = '2016-07-25'
+  s.version     = '0.0.2'
+  s.date        = '2016-07-27'
   s.summary     = 'peaklist'
   s.description = 'Data types and parser for PeakList.xml documents'
-  s.authors     = ['Scott Howland']
+  s.authors     = ['Scott Howland', 'Mark Borkum']
   s.email       = 'scott.howland@pnnl.gov'
-  s.files       = ['lib/peakListParser.rb']
+  s.files       = ['lib/bruker.rb']
   s.homepage    = 'https://github.com/megultron/Ruby-PeakList-Library'
   s.license     = 'ECL-2.0'
-  s.add_runtime_dependency "nokogiri",
-    [">= 1.6"]
+  s.add_runtime_dependency 'nokogiri', ['>= 1.6']
 end
