@@ -7,6 +7,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Scott Howland', 'Mark Borkum']
   s.email       = 'scott.howland@pnnl.gov'
   s.files       = ['lib/bruker.rb']
+  s.test_files  = Dir.glob('test/test_*.rb')
   s.homepage    = 'https://github.com/megultron/Ruby-PeakList-Library'
   s.license     = 'ECL-2.0'
   s.add_runtime_dependency 'nokogiri', ['>= 1.6']
